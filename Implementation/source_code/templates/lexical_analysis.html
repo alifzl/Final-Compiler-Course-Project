@@ -1,0 +1,76 @@
+{% extends "base.html" %}
+
+
+{% block content %}
+
+
+<div class="panel panel-default">
+        <div class="panel-body">
+        <form action="" method="post">
+            <textarea id="fonte" name="code" class="form-control" placeholder="عبارات مورد نظر خود را برای انجام تحلیل لغوی وارد کنید" rows="10">{{code}}</textarea><br>
+            <p dir="rtl" lang="ar"><button  class="btn btn-primary" type="submit">آغاز فرآیند تحلیل لغوی</button></p>
+
+        </form>
+    </div>
+</div>
+
+{% if  llex or lerror %}
+
+<div class="jumbotron">
+
+        <h1 dir="rtl" lang="ar">نتایج تحلیل لغوی</h1>
+        <p dir="rtl" lang="ar">نتایج تحلیل لغوی عبارت وارد شده به شرح زیر است:</p>
+
+        {% if  lerror %}
+
+            <table class="table table-hover">
+                <thead>
+                    <tr>
+                        <th>نوع داده تکن</th>
+                        <th>توکن</th>
+                        <th>سطر</th>
+                    </tr>
+                </thead>
+                <tbody>
+                {% for error in lerror %}
+
+                    <tr class="danger">
+                        <td>ERROR</td>
+                        <td>{{ error.0 }}</td>
+                        <td>{{ error.1 }}</td>
+                    </tr>
+
+                {% endfor %}
+                </tbody>
+            </table>
+        {% endif %}
+
+        <table class="table table-hover">
+            <thead>
+                <tr>
+                    <th>نوع داده توکن</th>
+                    <th>توکن</th>
+                    <th>سطر</th>
+                    <th>موقعیت</th>
+                </tr>
+            </thead>
+            <tbody>
+            {% for tok in llex %}
+
+                <tr class="success">
+                    <td>{{ tok.0 }}</td>
+                    <td>{{ tok.1 }}</td>
+                    <td>{{ tok.2 }}</td>
+                    <td>{{ tok.3 }}</td>
+                    <td></td>
+                </tr>
+
+            {% endfor %}
+            </tbody>
+        </table>
+
+</div>
+
+{% endif %}
+
+{% endblock %}

@@ -1,0 +1,78 @@
+{% extends "base.html" %}
+
+
+{% block content %}
+
+<div dir="rtl" lang="ar" class="jumbotron">
+  <h1شبیه ساز کامپایلر زبان برنامه نویسی COOL</h1>
+  <p> این پروژه پایانی درس اصول طراحی کامپایلرها می باشد.</p>
+  <p>استاد محترم: سرکار خانم نفیسه شرقی وند </p>
+  <p><bold>برای انجام تحلیل لغوی از پیوند "تحلیل لغوی" استفاده کنید.</bold></p>
+  <p dir="rtl"><bold>برای آزمودن نحوه کارکرد تجزیه گر می توانید از کدهای آماده زیر به زبان برنامه نویسی Cool استفاده کنید.</bold></p>
+  <figure dir="ltr">
+    <figcaption dir="rtl">کد اولیه سلام دنیا!</figcaption>
+    <pre>
+      <code>
+        class Main inherits IO {
+          a : Int <- 1;
+          main() : Object { 
+              {
+                  out_string("Hello, world.\n");
+                  out_int(a);
+              }
+          };
+      }; 
+      </code>
+    </pre>
+  </figure>
+
+  <figure dir="ltr">
+      <figcaption dir="rtl"> کد عبارت شرطی if </figcaption>
+      <pre>
+        <code>
+            class Main inherits IO {
+              c : Int <- 1;
+              flag : Bool <- true;
+              main() : Object { 
+                  if 0 < c then
+                      true
+                  else
+                      false
+                  fi                
+              };
+          }; 
+           
+        </code>
+      </pre>
+    </figure>
+
+    <figure dir="ltr">
+        <figcaption dir="rtl"> کد عبارت شرطی while</figcaption>
+        <pre>
+          <code>
+              class Main inherits IO {
+                c : Int <- 1;
+                flag : Bool <- true;
+                main() : Object { 
+                    {
+                        out_string("Hello, world.\n");
+                        (let countdown : Int <- 20 in
+                            while flag loop
+                                {
+                                    countdown <- countdown - 1;
+                                    out_int(c);
+                                }
+                            pool
+                        );
+                    }
+                };
+            }; 
+             
+             
+          </code>
+        </pre>
+      </figure>
+
+</div>
+
+{% endblock %}

@@ -1,0 +1,42 @@
+<!DOCTYPE html>
+<html>
+<head>
+	<title dir="rtl" lang="ar">شبیه ساز کامپایلر COOL</title>
+  <link href='http://www.fontonline.ir/css/BYekan.css' rel='stylesheet' type='text/css'>
+	<style>
+  *{
+  font-family:'BYekan',Sans-Serif;
+  font-size:14px;
+ }
+</style>
+	<link href={{ url_for('static', filename='css/bootstrap.min.css') }} rel="stylesheet"/>
+</head>
+<body>
+
+	<nav class="navbar navbar-inverse">
+	  <div class="container-fluid">
+	    <div class="navbar-header">
+	      <button type="button" class="navbar-toggle collapsed" data-toggle="collapse" data-target="#bs-example-navbar-collapse-2">
+	        <span class="sr-only">Toggle navigation</span>
+	        <span class="icon-bar"></span>
+	        <span class="icon-bar"></span>
+	        <span class="icon-bar"></span>
+	      </button>
+	      <a dir="rtl" lang="ar" class="navbar-brand" href="{{ url_for('index')}}">شبیه ساز کامپایلر COOL</a>
+	    </div>
+
+	    <div class="collapse navbar-collapse" id="bs-example-navbar-collapse-2">
+	      <ul class="nav navbar-nav">
+	        <li><a href="{{ url_for('lexical')}}">تحلیل لغوی</a></li>
+	      </ul>
+	    </div>
+	  </div>
+	</nav>
+
+
+	<div class="container">
+	{% block content %}
+	{% endblock %}
+	</div>
+</body>
+</html>
