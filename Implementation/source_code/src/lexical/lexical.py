@@ -33,15 +33,21 @@ class MyLex(object):
 
 if __name__ == '__main__':
     entered_expression = 0
+    # if the length of input dont meet right...
     if len(sys.argv) != 2:
         print('Choose a appropriate cool file to read. (excepting a .cl file)')
         sys.exit(1)
-
+    # take the second parameter of executing command as input file
     with open(sys.argv[1]) as file:
+        # reading the whole file...
         entered_expression = file.read()
+    # instantiating the lexical module
     l = MyLex()
+    # exporting the meaningfull tokens and the faulty ones
     llex, lerror = l.tokenize(entered_expression)
 
+    # for god's sake !
+    # should i ducument this?
     for l in llex:
         print(l)
 
