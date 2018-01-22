@@ -58,7 +58,7 @@ def t_ID(t):
         if t.value[0].islower():
             # if the first character of word is lower case,
             # and it's notin the reserved words which defined above...
-            # it's a id of an object
+            # it's a id of an object (variable name)
             t.type = 'OBJECTID'
         else:
             # it's an type ID

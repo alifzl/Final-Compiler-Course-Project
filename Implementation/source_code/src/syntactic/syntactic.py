@@ -3,11 +3,14 @@ import ply.yacc as yacc
 from ..lexical import MyLex
 from ..lexical.tokrules import *
 
-from ast import *
 
 
 def syntactic(string):
-
+    # declaring the 'Rule-Function' methods to give soul to the bodies !
+    # 'p' is a string (in better words, expressions)
+    # which consists of a few valid tokens
+    # every token is accessible via it's occurence order index
+    # For Example : p[1] is the second token of the expression
     def p_class_list_many(p):
         '''class_list : class_list class SEMI'''
         p[0] = p[1] + [p[2]]
@@ -223,44 +226,40 @@ def syntactic(string):
         '''expression : NOT expression'''
         p[0] = Not(p[2])
 
-    precedence = (
-        ('right', 'ASSIGN'),
-        ('left', 'NOT'),
-        ('nonassoc', 'LE', 'LT', 'EQ'),
-        ('left', 'PLUS', 'MINUS'),
-        ('left', 'MULT', 'DIV'),
-        ('left', 'ISVOID'),
-        ('left', 'NEG'),
-        ('left', 'AT'),
-        ('left', 'DOT'),
-    )
 
+    # creating a list for collecting the collecting the syntax errors
     serror = []
 
-    # Error rule for syntax errors
+    # error rule for syntax errors
     def p_error(p):
+        # getting the details of the error
         er = (p.type, p.value[0], p.lineno, p.lexpos)
+        # appending the subsequent error to our error list
         serror.append(er)
+        # and apperantly print out the error
         print('parser error: {}'.format(p))
 
-    # Build the parser
+    # build the parser
     parser = yacc.yacc()
-
+    # instantiating the lexer module
     l = MyLex()
+    # calling the lexer function from the instatiated object
     lexer = l.lexer
-
+    # fire-up the engine !
     result = parser.parse(string, lexer=lexer)
-
+    # returninig the produced parsing result
     return result, serror
 
 
 if __name__ == '__main__':
     import sys
-
+    # if we have an input .cl file...
+    # take it as a argument
     if len(sys.argv) > 1:
         with open(sys.argv[1]) as file:
             data = file.read()
-
+        # calling the syntactical process function
+        # and returning the results and the errors.
         result, errors = syntactic(data)
         if result:
             print('\nOK!\n')
