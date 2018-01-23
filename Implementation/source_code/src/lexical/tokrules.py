@@ -52,6 +52,7 @@ def t_ID(t):
         return t
     # if the lower value of word is in the reserved set,
     # capitalize it and take it as a reserved word
+    # WE ARE SMART !
     if t.value.lower() in reserved:
         t.type = t.value.upper()
     else:
@@ -95,6 +96,7 @@ def t_NEWLINE(t):
     # ' \n ' means new line !
     # just in case of you didn't know that !
     r'\n+'
+    # updating line number count
     t.lexer.lineno += t.value.count("\n")
 
 # a list for collecting the lexical errors
