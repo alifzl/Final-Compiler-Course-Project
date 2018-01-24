@@ -11,6 +11,11 @@ def syntactic(string):
     # which consists of a few valid tokens
     # every token is accessible via it's occurence order index
     # For Example : p[1] is the second token of the expression
+
+    # Class Area 
+
+    # class list is the list of global variables (TYPEID)
+    # which comes in the first sentences of the COOL class
     def p_class_list_many(p):
         '''class_list : class_list class SEMI'''
         p[0] = p[1] + [p[2]]
@@ -18,7 +23,7 @@ def syntactic(string):
     def p_class_list_single(p):
         '''class_list : class SEMI'''
         p[0] = [p[1]]
-
+    # "feature_list" means class parameters
     def p_class(p):
         '''class : CLASS TYPEID LBRACE feature_list RBRACE'''
         p[0] = Class(p[2], "Object", p[4])
@@ -27,6 +32,9 @@ def syntactic(string):
         '''class : CLASS TYPEID INHERITS TYPEID LBRACE feature_list RBRACE'''
         p[0] = Class(p[2], p[4], p[6])
 
+    # Feature List Area
+
+    # "feature_list" means class parameters
     def p_feature_list_many(p):
         '''feature_list : feature_list feature SEMI'''
         p[0] = p[1] + [p[2]]
@@ -50,22 +58,27 @@ def syntactic(string):
     def p_feature_attr_initialized(p):
         '''feature : OBJECTID COLON TYPEID ASSIGN expression'''
         p[0] = Attr(p[1], p[3], p[5])
-
+    
+    # simple attribute assigning
     def p_feature_attr(p):
         '''feature : OBJECTID COLON TYPEID'''
         p[0] = Attr(p[1], p[3], None)
 
+    
+    # a list consist of a few sub-lists
     def p_formal_list_many(p):
         '''formal_list : formal_list COMMA formal'''
         p[0] = p[1] + [p[3]]
-
+    # a list which has one cell
     def p_formal_list_single(p):
         '''formal_list : formal'''
         p[0] = [p[1]]
-
+    # declaring type of some variable
     def p_formal(p):
         '''formal : OBJECTID COLON TYPEID'''
         p[0] = (p[1], p[3])
+    
+    # Variable Area
 
     def p_expression_object(p):
         '''expression : OBJECTID'''
@@ -83,9 +96,12 @@ def syntactic(string):
         '''expression : STR_CONST'''
         p[0] = Str(p[1])
 
+    # paranthesis area
     def p_expression_block(p):
         '''expression : LBRACE block_list RBRACE'''
         p[0] = Block(p[2])
+  
+    # Block Area (explained in manual)
 
     def p_block_list_many(p):
         '''block_list : block_list expression SEMI'''
@@ -95,10 +111,13 @@ def syntactic(string):
         '''block_list : expression SEMI'''
         p[0] = [p[1]]
 
+    # Expression Area
+
     def p_expression_assignment(p):
         '''expression : OBJECTID ASSIGN expression'''
         p[0] = Assign(Object(p[1]), p[3])
 
+    # e.g : method call
     def p_expression_dispatch(p):
         '''expression : expression DOT OBJECTID LPAREN expr_list RPAREN'''
         p[0] = Dispatch(p[1], p[3], p[5])
@@ -156,6 +175,8 @@ def syntactic(string):
         '''expression : LPAREN expression RPAREN'''
         p[0] = p[2]
 
+    # Conditional Statements Area
+
     def p_expression_if(p):
         '''expression : IF expression THEN expression ELSE expression FI'''
         p[0] = If(p[2], p[4], p[6])
@@ -206,6 +227,7 @@ def syntactic(string):
         '''case_list : case_list case'''
         p[0] = p[1] + [p[2]]
 
+    # see the "case.cl" example
     def p_case_expr(p):
         '''case : OBJECTID COLON TYPEID DARROW expression SEMI'''
         p[0] = (p[1], p[3], p[5])

@@ -33,7 +33,7 @@ t_EQ = '='
 t_NEG = '~'
 t_LT = '<'
 t_AT = '@'
-
+# ignore 'tab' 'carriage return' and 'soft return' (shift + Enter)
 t_ignore = ' \t\r\f'
 
 

@@ -33,7 +33,7 @@ class MyLex(object):
 
 if __name__ == '__main__':
     entered_expression = 0
-    # if the length of input dont meet right...
+    # if the length of input do not meet right...
     if len(sys.argv) != 2:
         print('Choose a appropriate cool file to read. (excepting a .cl file)')
         sys.exit(1)
